@@ -1,35 +1,61 @@
-﻿
-
-using BLL.Domain.BusinessObjects;
+﻿using BLL.Domain.BusinessObjects;
+using DAL.Repositories;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
 
 namespace BLL.Services
 {
+    /// <summary>
+    /// Бизнес логика по товарам
+    /// </summary>
     public class ProductService : IProductService
     {
+        private readonly ProductsRepo _productsRepo;
+        private readonly ILogger<ProductService> _logger;
+
+        public ProductService(ProductsRepo productsRepo,ILogger<ProductService> logger)
+        {
+            this._productsRepo = productsRepo;
+            this._logger = logger;
+        }
+
         public bool Add(BO_Product businessObject)
         {
-            throw new System.NotImplementedException();
+            var newProduct = businessObject.To_DAL();
+            return _productsRepo.Add(newProduct);
         }
 
         public bool Delete(int id)
         {
-            throw new System.NotImplementedException();
+            var deletedProduct = _productsRepo.GetOne(id);
+
+            if (deletedProduct is null)
+                return false;
+
+            return _productsRepo.Delete(deletedProduct);
         }
 
         public BO_Product Get(int id)
         {
-            throw new System.NotImplementedException();
+            return _productsRepo.GetOne(id)?.To_BO();
         }
 
         public ICollection<BO_Product> GetAll()
         {
-            throw new System.NotImplementedException();
+            return _productsRepo.GetAll().To_BO();
         }
 
         public bool Update(BO_Product businessObject)
         {
-            throw new System.NotImplementedException();
+            var updatedProduct = _productsRepo.GetOne(businessObject.Id);
+
+            if (updatedProduct is null)
+                return false;
+
+            updatedProduct.Name = businessObject.Name;
+            updatedProduct.Price = businessObject.Price;
+
+            return _productsRepo.Update(updatedProduct);
         }
     }
 }

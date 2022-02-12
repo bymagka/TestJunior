@@ -20,38 +20,38 @@ namespace DAL.Repositories
             _table = _dbContext.Set<T>();
         }
 
-        public bool Add(T entity)
+        public virtual bool Add(T entity)
         {
             _table.Add(entity);
 
             return SaveChanges();
         }
 
-        public bool Add(ICollection<T> entities)
+        public virtual bool Add(ICollection<T> entities)
         {
             _table.AddRange(entities);
 
             return SaveChanges();
         }
 
-        public ICollection<T> GetAll()
+        public virtual ICollection<T> GetAll()
         {
             return _table.ToList();
         }
 
-        public T GetOne(int id)
+        public virtual T GetOne(int id)
         {
             return _table.Find(id);
         }
 
-        public bool Update(T entity)
+        public virtual bool Update(T entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
 
             return SaveChanges();
         }
 
-        public bool Delete(T entity)
+        public virtual bool Delete(T entity)
         {
             _dbContext.Entry(entity).State = EntityState.Deleted;
 
