@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DAL.MyDataInitializer;
+using Serilog;
+using Serilog.Events;
 
 namespace MyWebAPI
 {
@@ -28,6 +30,11 @@ namespace MyWebAPI
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .UseSerilog((host, log) => log.ReadFrom.Configuration(host.Configuration)
+                   .MinimumLevel.Debug()
+                   .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+                   .Enrich.FromLogContext()
+                   .WriteTo.Console())       
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
