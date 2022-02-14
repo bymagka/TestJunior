@@ -11,8 +11,8 @@ namespace DAL.Repositories
     /// <typeparam name="T">тип таблицы для репозитория</typeparam>
     public class BaseRepo<T> : IRepo<T> where T : BaseEntities.BaseEntity
     {
-        private readonly MyContext _dbContext;
-        private readonly DbSet<T> _table;
+        protected readonly MyContext _dbContext;
+        protected readonly DbSet<T> _table;
 
         public BaseRepo(MyContext dbContext)
         {

@@ -24,9 +24,11 @@ namespace BLL.Services
         {
             var newProduct = businessObject.To_DAL();
 
-            businessObject.Id = newProduct.Id;
+            var result = _productsRepo.Add(newProduct);
 
-            return _productsRepo.Add(newProduct);
+            if(result) businessObject.Id = newProduct.Id;
+
+            return result;
         }
 
         public bool Delete(int id)
@@ -41,7 +43,11 @@ namespace BLL.Services
 
         public BO_Product Get(int id)
         {
-            return _productsRepo.GetOne(id)?.To_BO();
+            var result = _productsRepo.GetOne(id);
+
+            if (result is null) return null;
+            else return result.To_BO();
+            
         }
 
         public ICollection<BO_Product> GetAll()

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
+
+
 namespace BLL.Domain.BusinessObjects
 {
     public static class Extensions
@@ -31,17 +33,35 @@ namespace BLL.Domain.BusinessObjects
 
         public static ICollection<BO_Product> To_BO(this ICollection<Product> products)
         {
-            return products.Select(prod => new BO_Product
-            {
-                Id = prod.Id,
-                Name = prod.Name,
-                Price = prod.Price,
-            }
-            ).ToList();
+            return products.Select(prod => prod.To_BO()).ToList();
         }
 
         #endregion
-    
-    
+
+        #region SalesPoints
+        public static BO_SalesPoint To_BO(this SalesPoint sp)
+        {
+            return new BO_SalesPoint
+            {
+                Id = sp.Id,
+                Name = sp.Name,
+                ProvidedProducts = sp.ProvidedProducts.Select((x) =>
+                {
+                    return new BO_ProvidedProduct { ProductId = x.Product.Id, ProductQuantity = x.Quantity };
+                })
+                .ToList()
+            };
+        }
+
+
+        public static ICollection<BO_SalesPoint> To_BO(this ICollection<SalesPoint> salesPoints)
+        {
+            return salesPoints.Select(sp => sp.To_BO()).ToList();
+        }
+
+
+        #endregion
+
+
     }
 }
