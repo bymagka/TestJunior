@@ -18,6 +18,6 @@ namespace DAL.Entities
         /// <summary>
         /// Идентификаторы покупок, когда либо осуществляемых покупателем
         /// </summary>
-        public virtual ICollection<int> SalesIds { get; set; }
+        public virtual ICollection<SaleId> SalesIds { get; set; }
     }
 }

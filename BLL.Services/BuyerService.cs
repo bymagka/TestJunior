@@ -2,7 +2,7 @@
 
 namespace BLL.Services
 {
-    public class BuyerService
+    public class BuyerService : IBuyerSerice
     {
         
     }

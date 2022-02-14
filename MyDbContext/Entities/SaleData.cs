@@ -8,7 +8,7 @@ namespace DAL.Entities
     /// <summary>
     /// Данные о продаваемых товарах в акте продажи
     /// </summary>
-    public class SaleData
+    public class SaleData : BaseEntities.BaseEntity
     {
         /// <summary>
         /// Продаваемый товар

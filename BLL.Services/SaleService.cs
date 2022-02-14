@@ -2,7 +2,7 @@
 
 namespace BLL.Services
 {
-    public class SaleService
+    public class SaleService : ISaleService
     {
         
     }

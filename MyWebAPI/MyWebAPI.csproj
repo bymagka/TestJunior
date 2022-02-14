@@ -5,11 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.14" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\BLL.Services\BLL.Services.csproj" />
+    <ProjectReference Include="..\DAL.Repositories\DAL.Repositories.csproj" />
+    <ProjectReference Include="..\MyDbContext\DAL.MyDbContext.csproj" />
   </ItemGroup>
 
 </Project>

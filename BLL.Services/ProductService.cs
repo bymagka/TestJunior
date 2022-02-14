@@ -1,7 +1,8 @@
 ﻿using BLL.Domain.BusinessObjects;
-using DAL.Repositories;
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
+using DAL.Repositories.Interfaces;
+
 
 namespace BLL.Services
 {
@@ -10,10 +11,10 @@ namespace BLL.Services
     /// </summary>
     public class ProductService : IProductService
     {
-        private readonly ProductsRepo _productsRepo;
+        private readonly IProductsRepo _productsRepo;
         private readonly ILogger<ProductService> _logger;
 
-        public ProductService(ProductsRepo productsRepo,ILogger<ProductService> logger)
+        public ProductService(IProductsRepo productsRepo,ILogger<ProductService> logger)
         {
             this._productsRepo = productsRepo;
             this._logger = logger;
@@ -22,6 +23,9 @@ namespace BLL.Services
         public bool Add(BO_Product businessObject)
         {
             var newProduct = businessObject.To_DAL();
+
+            businessObject.Id = newProduct.Id;
+
             return _productsRepo.Add(newProduct);
         }
 
