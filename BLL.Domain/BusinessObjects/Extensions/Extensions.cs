@@ -80,5 +80,33 @@ namespace BLL.Domain.BusinessObjects
         }
 
         #endregion
+
+        #region Sales
+        public static BO_Sale To_BO(this Sale sale)
+        {
+            return new BO_Sale
+            {
+                Id = sale.Id,
+                BuyerId = sale.Buyer?.Id,
+                SalesPointId = sale.SalesPoint.Id,
+                SalesData = sale.SalesData.Select(s=> new BO_SaleData
+                {
+                    ProductId = s.Product.Id,
+                    ProductQuantity = s.Quantity,
+                    ProductIdAmount = s.Product.Price * s.Quantity,
+                }).ToList(),
+
+                Date = sale.SalesDate.ToShortDateString(),
+                Time = sale.SalesDate.ToShortTimeString(),
+            };
+        }
+
+
+        public static ICollection<BO_Sale> To_BO(this ICollection<Sale> sales)
+        {
+            return sales.Select(s => s.To_BO()).ToList();
+        }
+
+        #endregion
     }
 }
