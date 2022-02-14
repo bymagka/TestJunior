@@ -62,6 +62,23 @@ namespace BLL.Domain.BusinessObjects
 
         #endregion
 
+        #region Buyers
+        public static BO_Buyer To_BO(this Buyer buyer)
+        {
+            return new BO_Buyer
+            {
+                Id = buyer.Id,
+                Name = buyer.Name,
+                SalesIds = buyer.SalesIds.Select(si=> new BO_SaleId { Value = si.Value}).ToList()
+            };
+        }
 
+
+        public static ICollection<BO_Buyer> To_BO(this ICollection<Buyer> salesPoints)
+        {
+            return salesPoints.Select(b => b.To_BO()).ToList();
+        }
+
+        #endregion
     }
 }

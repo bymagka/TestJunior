@@ -44,6 +44,15 @@ namespace DAL.MyDataInitializer
             var testSalesPoint2 = new SalesPoint { Id = 0, Name = "Запасная точка", ProvidedProducts = new List<ProvidedProduct> { new ProvidedProduct { Product = testProduct3, Quantity = 5 } } };
 
             salesPointsRepo.Add(new List<SalesPoint> {testSalesPoint1,testSalesPoint2 });
+            logger.LogInformation("Инициализация точек продаж завершена");
+
+            logger.LogInformation("Инициализация покупателей");
+            var testBuyer1 = new Buyer {Name = "ООО Рога и копыта",SalesIds = new List<SaleId> { new SaleId{Value = 1}, new SaleId {Value = 2 } } };
+            var testBuyer2 = new Buyer { Name = "ООО Ромашка", SalesIds = new List<SaleId> { new SaleId { Value = 3 }, new SaleId { Value = 4 } } };
+            buyerRepo.Add(new List<Buyer> { testBuyer1, testBuyer2 });
+            logger.LogInformation("Инициализация покупателей завершена");
+
+
         }
     }
 }

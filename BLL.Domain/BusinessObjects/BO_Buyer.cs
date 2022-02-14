@@ -24,6 +24,6 @@ namespace BLL.Domain.BusinessObjects
         /// <summary>
         /// Список идентификаторов всех когда либо осуществленных покупок
         /// </summary>
-        public List<int> SalesIds { get; set; }
+        public List<BO_SaleId> SalesIds { get; set; }
     }
 }

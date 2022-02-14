@@ -7,7 +7,9 @@ namespace DAL.Entities
     /// </summary>
     public class SaleId : BaseEntities.BaseEntity
     {
-
-      
+        /// <summary>
+        /// Значение ID заказов
+        /// </summary>
+        public int Value { get; set; }
     }
 }
