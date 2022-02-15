@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace BLL.Services
 {
-    public class BuyerService : IBuyerSerice
+    public class BuyerService : IBuyerService
     {
         private readonly IBuyersRepo _buyersRepo;
         private readonly ILogger<BuyerService> _logger;

@@ -4,7 +4,7 @@ using BLL.Domain.BusinessObjects;
 
 namespace BLL.Services
 {
-    public interface IBuyerSerice : IBaseService<BO_Buyer>
+    public interface IBuyerService : IBaseService<BO_Buyer>
     {
         
     }

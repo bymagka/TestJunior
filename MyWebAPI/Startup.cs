@@ -43,7 +43,7 @@ namespace MyWebAPI
 
             //services
             services.AddScoped<IProductService, ProductService>();
-            services.AddScoped<IBuyerSerice, BuyerService>();
+            services.AddScoped<IBuyerService, BuyerService>();
             services.AddScoped<ISalesPointService, SalesPointService>();
             services.AddScoped<ISaleService, SaleService>();
 

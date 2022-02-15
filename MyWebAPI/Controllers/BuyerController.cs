@@ -9,10 +9,10 @@ namespace MyWebAPI.Controllers
     [Route("api/buyers")]
     public class BuyerController : ControllerBase
     {
-        private readonly IBuyerSerice buyerService;
+        private readonly IBuyerService buyerService;
         private readonly ILogger<BuyerController> logger;
 
-        public BuyerController(IBuyerSerice buyerService, ILogger<BuyerController> logger)
+        public BuyerController(IBuyerService buyerService, ILogger<BuyerController> logger)
         {
             this.buyerService = buyerService;
             this.logger = logger;
