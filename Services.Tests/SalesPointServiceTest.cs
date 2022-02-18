@@ -57,7 +57,7 @@ namespace Services.Tests
 
 
         [TestMethod]
-        public void BuyerService_GetAll_CorrectCount()
+        public void SalesPointService_GetAll_CorrectCount()
         {
             var salesPoints = salesPointService.GetAll();
 
@@ -65,7 +65,7 @@ namespace Services.Tests
         }
 
         [TestMethod]
-        public void BuyerService_GetAll_CorrectType()
+        public void SalesPointService_GetAll_CorrectType()
         {
             var salesPoints = salesPointService.GetAll();
 
