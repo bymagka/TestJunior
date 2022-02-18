@@ -63,5 +63,13 @@ namespace Services.Tests
 
             Assert.Equal(2, salesPoints.Count);
         }
+
+        [TestMethod]
+        public void BuyerService_GetAll_CorrectType()
+        {
+            var salesPoints = salesPointService.GetAll();
+
+            Assert.IsType<List<BO_SalesPoint>>(salesPoints);
+        }
     }
 }
