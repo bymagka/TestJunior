@@ -50,14 +50,14 @@ namespace MyWebAPI.Controllers
         {
             logger.LogInformation("adding buyer");
 
-            bool succes = buyerService.Add(buyer);
+            bool success = buyerService.Add(buyer);
 
-            if (succes)
+            if (success)
                 logger.LogError("buyer has been added. New id is {0}", buyer.Id.ToString());
             else
                 logger.LogInformation("buyer hasn't been added");
 
-            return succes ? Ok(buyer) : NotFound(buyer);
+            return success ? Ok(buyer) : NotFound(buyer);
         }
 
         [HttpDelete]
@@ -65,14 +65,14 @@ namespace MyWebAPI.Controllers
         {
             logger.LogInformation("deleting buyer");
 
-            bool succes = buyerService.Delete(id);
+            bool success = buyerService.Delete(id);
 
-            if (succes)
+            if (success)
                 logger.LogError("buyer with id {0} has been deleted.", id.ToString());
             else
                 logger.LogInformation("buyer with id {0} hasn't been deleted", id.ToString());
 
-            return succes ? Ok(id) : NotFound(id);
+            return success ? Ok(id) : NotFound(id);
         }
 
         [HttpPost("update")]
@@ -80,15 +80,15 @@ namespace MyWebAPI.Controllers
         {
             logger.LogInformation("adding buyer");
 
-            bool succes = buyerService.Update(buyer);
+            bool success = buyerService.Update(buyer);
 
 
-            if (succes)
+            if (success)
                 logger.LogError("buyer with id {0} has been updated.", buyer.Id.ToString());
             else
                 logger.LogInformation("buyer with id {0} hasn't been added", buyer.Id.ToString());
 
-            return succes ? Ok(buyer) : NotFound(buyer);
+            return success ? Ok(buyer) : NotFound(buyer);
         }
     }
 }

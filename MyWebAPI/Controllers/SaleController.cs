@@ -60,9 +60,9 @@ namespace MyWebAPI.Controllers
             bool succes = salesService.Add(sale);
 
             if (succes)
-                logger.LogError("sale has been added. New id is {0}", sale.Id.ToString());
+                logger.LogInformation("sale has been added. New id is {0}", sale.Id.ToString());
             else
-                logger.LogInformation("sale hasn't been added");
+                logger.LogError("sale hasn't been added");
 
             return succes ? Ok(sale) : NotFound(sale);
         }
@@ -75,9 +75,9 @@ namespace MyWebAPI.Controllers
             bool succes = salesService.Delete(id);
 
             if (succes)
-                logger.LogError("sales point with id {0} has been deleted.", id.ToString());
+                logger.LogInformation("sale with id {0} has been deleted.", id.ToString());
             else
-                logger.LogInformation("sales point with id {0} hasn't been deleted", id.ToString());
+                logger.LogError("sale with id {0} hasn't been deleted", id.ToString());
 
             return succes ? Ok(id) : NotFound(id);
         }
@@ -90,9 +90,9 @@ namespace MyWebAPI.Controllers
             bool succes = salesService.Update(sale);
 
             if (succes)
-                logger.LogError("sales point  with id {0} has been updated.", sale.Id.ToString());
+                logger.LogInformation("sales with id {0} has been updated.", sale.Id.ToString());
             else
-                logger.LogInformation("sales point with id {0} hasn't been added", sale.Id.ToString());
+                logger.LogError("sales with id {0} hasn't been added", sale.Id.ToString());
 
             return succes ? Ok(sale) : NotFound(sale);
         }

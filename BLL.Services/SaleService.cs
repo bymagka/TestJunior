@@ -29,24 +29,7 @@ namespace BLL.Services
 
         public bool Add(BO_Sale businessObject)
         {
-            var salesPoint = _salesPointRepo.GetOne(businessObject.SalesPointId);
-
-            if (salesPoint.ProvidedProducts.Count < businessObject.SalesData.Count)
-                return false;
-
-            var query = businessObject.SalesData
-                .Join(salesPoint.ProvidedProducts,
-                      saleData => saleData.ProductId,
-                      sp => sp.Product.Id,
-                      (saleData, sp) => new { saleData, sp }
-                );
-
-            if (query.Count() != businessObject.SalesData.Count)
-                return false;
-
-            if (query.Where(x => x.saleData.ProductQuantity > x.sp.Quantity).Count() > 0)
-                return false;
-
+   
             //здесь по хорошему должна быть транзакция, но нет доступа к контексту бд (добавить контекст в базовый интерфейс сервисов?)
             var newSale = new Sale
             {
@@ -64,29 +47,15 @@ namespace BLL.Services
 
             };
 
-            var resultSaleSaving = _salesRepo.Add(newSale);
+            var result = _salesRepo.Add(newSale);
 
-            if (resultSaleSaving) businessObject.Id = newSale.Id;
-            else return resultSaleSaving;
-
-            foreach (var item in query)
+            if (result) 
             {
-                item.sp.Quantity -= item.saleData.ProductQuantity;
+                businessObject.Id = newSale.Id;
+                return result;
             }
+            else return result;
 
-            resultSaleSaving = _salesPointRepo.Update(salesPoint);
-
-            if (!resultSaleSaving)
-                return resultSaleSaving;
-
-
-            if (newSale.Buyer is { })
-            {
-                newSale.Buyer.SalesIds.Add(new SaleId { Value = newSale.Id });
-                resultSaleSaving = _buyersRepo.Update(newSale.Buyer);
-            }
-
-            return resultSaleSaving;
         }
 
         public bool Delete(int id)
